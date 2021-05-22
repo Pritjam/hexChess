@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Unit {
     private Rank rank;
-    private Color color;
+    protected Color color;
 
     public Unit(Rank r, Color c) {
         this.rank = r;
@@ -16,7 +16,7 @@ public class Unit {
             case PAWN:
                 break;
             case BISHOP:
-                g.drawOval(centerX, centerY, radius / 2, radius / 2);
+                g.drawString("B", centerX, centerY);
                 break;
             case KING:
                 g.drawString("K", centerX, centerY);
@@ -39,5 +39,44 @@ public class Unit {
         }
         g.drawPolygon(hex);
 
+    }
+
+    public boolean validMove(int dq, int dr) {
+        switch(this.rank) {
+            case PAWN:
+                return Math.abs(dq) == 1 && dr == 0;
+            case BISHOP:
+                return (dr != 0 && dq == 0) || (dr == dq && dq != 0);
+            case KING:
+                return Math.abs(dq + dr) != 0;
+            case KNIGHT:
+                return (dq == -1 && dr == -1) ||
+                       (dq == 1 && dr == -2) ||
+                       (dq == 2 && dr == -1) ||
+                       (dq == 1 && dr == 1) ||
+                       (dq == -1 && dr == 2) ||
+                       (dq == -2 && dr == 1);
+            case QUEEN:
+                return (dr != 0 && dq == 0) || (dr == dq && dq != 0) || (dq != 0 && dr == 0);
+            default:
+                return false;
+        }
+    }
+
+    public String toString() {
+        switch(this.rank) {
+            case PAWN:
+                return "pawn";
+            case BISHOP:
+                return "bishop";
+            case KING:
+                return "king";
+            case KNIGHT:
+                return "knight";
+            case QUEEN:
+                return "queen";
+            default:
+                return "other";
+        }
     }
 }

@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Tile {
-    private int q,r; //axial coordinates - q axis increases to the left, r increases down-right.
+    private int q,r; //axial coordinates - q axis increases to the right, r increases up-left.
     private Unit unit;
 
     public Tile(int q, int r) {
