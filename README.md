@@ -13,4 +13,9 @@ The pieces of this game:
 Currently, the game board drawing is set up, and I have to make the game logic implemented. I will also implement multiplayer by encoding a "move" as a string (similar to chess move notation) that players can send to each other to synchronize their games (this could also integrate with a chat client that would provide the message sending functionality built in to the game)
 
 5/21/2021
-  Game logic is somewhat implemented! Pieces can move and capture. The game will check for move validity and let you know if something is wrong (hopefully without crashing). Currently there is no turn enforcement or win checking. To run the game, just compile all of the files and then run Main. I'll make an executable jar with the next release.
+
+Game logic is somewhat implemented! Pieces can move and capture. The game will check for move validity and let you know if something is wrong (hopefully without crashing). Currently there is no turn enforcement or win checking. To run the game, just compile all of the files and then run Main. I'll make an executable jar with the next release.
+
+MOVE NOTATION
+
+The notation for moves is pretty simple. Each move is a 4 character string, made of 2 coordinates--source and destination. Coordinates are in the QR form, where the Q axis runs from left to right, a to i. The R coordinates run from bottom-left to top-right, from 1 to 9. This means that the black knights are at a1, c1, and e1 (from left to right) and the blue bishops are at e8 and h8 (left and right).
