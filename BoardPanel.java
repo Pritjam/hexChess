@@ -3,7 +3,6 @@ import javax.swing.BorderFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.Arrays;
 
 class BoardPanel extends JPanel {
     public Tile[][] map;
