@@ -11,3 +11,6 @@ The pieces of this game:
   - Queen (hexagon with a Q inside): can move in any direction infinitely
   
 Currently, the game board drawing is set up, and I have to make the game logic implemented. I will also implement multiplayer by encoding a "move" as a string (similar to chess move notation) that players can send to each other to synchronize their games (this could also integrate with a chat client that would provide the message sending functionality built in to the game)
+
+5/21/2021
+  Game logic is somewhat implemented! Pieces can move and capture. The game will check for move validity and let you know if something is wrong (hopefully without crashing). Currently there is no turn enforcement or win checking. To run the game, just compile all of the files and then run Main. I'll make an executable jar with the next release.
