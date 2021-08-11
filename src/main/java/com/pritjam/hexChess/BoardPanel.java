@@ -12,6 +12,16 @@ class BoardPanel extends JPanel {
     public BoardPanel() {
         setBorder(BorderFactory.createLineBorder(Color.black));
         map = new Tile[9][9];
+        /**
+         * this loop sets up the internal storage for the map. It's pretty complicated, 
+         * but here's a sample of the end result for a smaller hex:
+         * 
+         * -- -- c5 d5 e5
+         * -- b4 c4 d4 e4
+         * a3 b3 c3 d3 e3
+         * a2 b2 c2 d2 --
+         * a1 b1 c1 -- --
+         */
         for(int q = -4; q <= 4; q++) {
             for(int r = (q < 0) ? -4 - q : -4; r <= ((q < 0) ? 4 : 4 - q); r++) {
                 map[r + 4][q + 4] = new Tile(q, r);
@@ -56,15 +66,22 @@ class BoardPanel extends JPanel {
         }
     }
 
+    public void mark(String tile, boolean mark) {
+        int q = tile.charAt(0) - 'a';
+        int r = '9' - tile.charAt(1);
+        
+        map[r][q].marked = mark;
+        
+    }
+
     public void attemptMove(String move) {
         if(move == null) {
             throw new IllegalArgumentException("Input was null");
         }
-        String[] parts = move.split(",");
-        if(parts[0].length() != 4) {
+        if(move.length() != 4) {
             throw new IllegalArgumentException("Improper chess move for move " + move);
         }
-        char[] sourceDest = parts[0].toCharArray();
+        char[] sourceDest = move.toCharArray();
         int[] moves = new int[4];
         moves[0] = sourceDest[0] - 'a'; //source q
         moves[1] = '9' - sourceDest[1]; //r
@@ -78,7 +95,7 @@ class BoardPanel extends JPanel {
                 throw new IllegalArgumentException("Chess destination or source out of bounds for move " + move);
             }
         }
-        //use checkMove to check if it's a valid move
+        //use validMove to check if it's a valid move
         Tile t = map[moves[1]][moves[0]];
         Unit piece = t.getUnit();
         if(piece == null) {
@@ -94,6 +111,10 @@ class BoardPanel extends JPanel {
                 throw new IllegalArgumentException("Destination is occupied!");
             } else {
                 System.out.println("capture happened!");
+                if(target.getRank() == Rank.KING) {
+                    System.out.println("Checkmate!");
+                    System.exit(0);
+                }
             }
         }
         //do the move

@@ -14,7 +14,7 @@ public class Main {
             public void run() {
                 createAndShowGUI();
             }
-        });
+        }); 
     }
     
     private static void createAndShowGUI() {
@@ -30,6 +30,7 @@ public class Main {
 
         JTextField inputField = new InputTextField(50);
         inputField.setText("Input your move here!");
+        inputField.selectAll();
         GridBagConstraints d = new GridBagConstraints();
         d.gridx = 0;
         d.gridy = 1;

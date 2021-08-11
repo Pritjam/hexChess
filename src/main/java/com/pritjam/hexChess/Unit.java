@@ -43,6 +43,10 @@ public class Unit {
 
     }
 
+    public Rank getRank() {
+        return this.rank;
+    }
+
     public boolean validMove(int dq, int dr) {
         switch(this.rank) {
             case PAWN:

@@ -3,15 +3,22 @@ package com.pritjam.hexChess;
 import java.awt.*;
 
 public class Tile {
-    private int q,r; //axial coordinates - q axis increases to the right, r increases up-left.
+    private int q,r; 
+    //axial coordinates - 
+    // q axis increases to the right, denoted by letters a-i
+    // r axis increases up-left, denoted by numbers 1-9
     private Unit unit;
+    public boolean marked;
+
+    private static final Color[] colors = {new Color(1.0F, 1.0F, 1.0F), new Color(0.9F, 0.9F, 0.9F), new Color(0.8F, 0.8F, 0.8F)};
 
     public Tile(int q, int r) {
         this.q = q;
         this.r = r;
         unit = null;
+        marked = false;
     }
-    private static final Color[] colors = {new Color(1.0F, 1.0F, 1.0F), new Color(0.9F, 0.9F, 0.9F), new Color(0.8F, 0.8F, 0.8F)};
+
     public Polygon getPolygon(int originX, int originY, int radius) {
         int xCenter = (int) (originX + 1.73 * this.q * radius + 1.73 * 0.5 * this.r * radius);
         int yCenter = (int) (originY + 1.5 * this.r * radius);
@@ -30,7 +37,7 @@ public class Tile {
     // }
 
     private Color getColor() {
-        return colors[((this.q - this.r) % 3 + 3) % 3];
+        return marked ? Color.CYAN : colors[((this.q - this.r) % 3 + 3) % 3];
     }
 
     public void setUnit(Unit u) {
@@ -48,6 +55,13 @@ public class Tile {
         int centerY = (int) (originY + 1.5 * this.r * radius);
         if(this.unit != null) {
             this.unit.draw(g, centerX, centerY, 2 * radius / 3);
+        }
+        if(marked) {
+            g.setColor(Color.RED);
+            StringBuilder coords = new StringBuilder();
+            coords.append((char) ('a' + (q + 4)));
+            coords.append((char) ('9' - (r + 4)));
+            g.drawString(coords.toString(), centerX, centerY);
         }
     }
 }
